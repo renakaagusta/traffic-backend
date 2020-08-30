@@ -104,6 +104,22 @@ streetRouter
   })
 
 streetRouter
+  .route('/street/location')
+  .post(function(req, resp) {
+    
+    console.log('POST /street/location');
+
+    street.findOne(
+      { name: req.body.streetName },
+      function(err, resp2) {
+        if(err) resp.status(400).send(err)
+        else 
+          resp.status(200).json(resp2.location)
+      }
+    )
+  })
+
+streetRouter
   .route('/street/all/count/now')
   .post(function (req, resp) {
 

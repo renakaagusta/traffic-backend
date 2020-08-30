@@ -8,6 +8,16 @@ var streetSchema = new Schema({
   description: {
     type: String,
   },
+  location: {
+    latitude: {
+      type: String,
+      default: "",
+    },
+    longitude: {
+      type: String,
+      default: "",
+    },
+  },
   limit: {
     safe: {
       type: Number,
