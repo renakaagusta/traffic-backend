@@ -22,6 +22,38 @@ streetRouter
   })
 
 streetRouter
+  .route('/street/add/location')
+  .post(function (req, resp) {
+
+    console.log('POST /street/add/location');
+
+    Street.findOneAndUpdate(
+      { name: req.body.streetName },
+      { $set: { "location.latitude":req.body.latitude, "location.longitude":req.body.longitude },},
+      function(err, resp2) {
+        if(err) resp.status(400).send(err)
+        else resp.status(200).send(resp2)
+      } 
+    )
+  })
+
+streetRouter
+  .route('/street/add/limit')
+  .post(function (req, resp) {
+
+    console.log('POST /street/add/limit');
+
+    street.findOneAndUpdate(
+      { name: req.body.name },
+      { $set: { "limit.safe": req.body.safe, "limit.warning": req.body.warning, "limit.danger": req.body.danger } },
+      function(err, resp2) {
+        if(err) resp.status(400).send(err)
+        else resp.status(200).send(resp2)
+      }  
+    )
+  })
+
+streetRouter
   .route('/street/count')
   .post(function(req, resp) {
 
