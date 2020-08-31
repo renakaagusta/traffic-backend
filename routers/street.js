@@ -242,6 +242,33 @@ streetRouter
   })
 
 streetRouter
+  .route('/street/condition/now')
+  .post(function(req, resp) {
+      
+    console.log('POST /street/count/now')
+
+    Street.findOne(
+      { name: req.body.streetName },
+
+      function(err, resp2) {
+        if(err) resp.send(err);
+        else {
+          var counting = {
+            motorcycle: 0,
+            car: 0,
+            truck: 0,
+            bus: 0,
+          }
+          if(resp2==null)
+            resp.status(200).send(counting)
+          else
+            resp.status(200).send(resp2.latestCondition)
+        };
+      }
+    )  
+  })
+
+streetRouter
   .route('/street/count/day')
   .post(function(req, resp) {
 
