@@ -43,7 +43,7 @@ streetRouter
 
     console.log('POST /street/add/limit');
 
-    street.findOneAndUpdate(
+    Street.findOneAndUpdate(
       { name: req.body.streetName },
       { $set: { "limit.safe": req.body.safe, "limit.warning": req.body.warning, "limit.danger": req.body.danger } },
       function(err, resp2) {
